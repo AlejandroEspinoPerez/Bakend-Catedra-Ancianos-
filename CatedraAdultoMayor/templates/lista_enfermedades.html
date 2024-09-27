@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enfermedades de {{ anciano.nombre }} {{ anciano.apellidos }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Agregar Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="container">
+    <h1>Enfermedades de {{ anciano.nombre }} {{ anciano.apellidos }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Enfermedad/Condición</th>
+                <th>Fecha Diagnóstico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enfermedad in enfermedades %}
+            <tr>
+                <td>{{ enfermedad.nombre_enfermedad }}</td>
+                <td>{{ enfermedad.fecha_diagnostico }}</td>
+                <td>
+                    <a href="{% url 'editar_enfermedad' enfermedad.id %}" class="btn btn-sm btn-warning" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'eliminar_enfermedad' enfermedad.id %}" class="btn btn-sm btn-danger" title="Eliminar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'crear_enfermedad' anciano.id %}" class="btn btn-success">
+        <i class="fas fa-plus-circle"></i> Agregar Enfermedad
+    </a>
+    <a href="{% url 'lista_ancianos' %}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Volver a la lista de Ancianos
+    </a>
+</body>
+</html>

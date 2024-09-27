@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Enfermedad</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    <h1 class="my-4">Eliminar Enfermedad</h1>
+    
+    <p>¿Estás seguro que deseas eliminar la enfermedad "{{ enfermedad.nombre_enfermedad }}"?</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+
+    <a href="{% url 'lista_enfermedades' enfermedad.anciano.id %}" class="btn btn-secondary mt-3">Cancelar</a>
+</body>
+</html>

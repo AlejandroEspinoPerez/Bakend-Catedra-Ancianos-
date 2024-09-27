@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="container">
+    <h1 class="my-4">Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Total Ancianos</h5>
+                    <p class="card-text">{{ total_ancianos }}</p>
+                    <a href="{% url 'lista_ancianos' %}" class="btn btn-light">Ver Ancianos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Total Contactos</h5>
+                    <p class="card-text">{{ total_contactos }}</p>
+                    <a href="{% url 'lista_contactos_todos' %}" class="btn btn-light">Ver Contactos</a>
+                </div>
+            </div>
+        </div>
+        <!-- Nueva tarjeta para el total de enfermedades únicas -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Total Enfermedades Únicas</h5>
+                    <p class="card-text">{{ total_enfermedades_unicas }}</p>
+                    <a href="{% url 'lista_enfermedades_todas' %}" class="btn btn-light">Ver Enfermedades</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contactos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    <h1 class="my-4">Lista de Contactos de Emergencia</h1>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre Familiar</th>
+                <th>Relación</th>
+                <th>Número de Teléfono</th>
+                <th>Anciano</th>  <!-- Nueva columna para el anciano -->
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contactos %}
+            <tr>
+                <td>{{ contacto.nombre_familiar }}</td>
+                <td>{{ contacto.relacion }}</td>
+                <td>{{ contacto.numero_telefono }}</td>
+                <td>{{ contacto.anciano.nombre }} {{ contacto.anciano.apellidos }}</td>  <!-- Muestra el nombre y apellidos del anciano -->
+                <td>
+                    <a href="{% url 'editar_contacto' contacto.id %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'eliminar_contacto' contacto.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay contactos disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos de Emergencia</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Agregar Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="container">
+    <h1>Contactos de Emergencia de {{ anciano.nombre }} {{ anciano.apellidos }}</h1>
+    <a href="{% url 'crear_contacto' anciano.id %}" class="btn btn-primary my-3">
+        <i class="fas fa-user-plus"></i> Añadir Contacto
+    </a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre Familiar</th>
+                <th>Relación</th>
+                <th>Número de Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contactos %}
+            <tr>
+                <td>{{ contacto.nombre_familiar }}</td>
+                <td>{{ contacto.relacion }}</td>
+                <td>{{ contacto.numero_telefono }}</td>
+                <td>
+                    <a href="{% url 'editar_contacto' contacto.id %}" class="btn btn-sm btn-primary" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'eliminar_contacto' contacto.id %}" class="btn btn-sm btn-danger" title="Eliminar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'lista_ancianos' %}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Volver a la lista de ancianos
+    </a>
+</body>
+</html>

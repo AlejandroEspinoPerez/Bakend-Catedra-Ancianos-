@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Enfermedad</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    <h1>Agregar Enfermedad para {{ anciano.nombre }} {{ anciano.apellidos }}</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="nombre_enfermedad">Nombre de la Enfermedad</label>
+            <input type="text" id="nombre_enfermedad" name="nombre_enfermedad" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="fecha_diagnostico">Fecha de Diagnóstico</label>
+            <input type="date" id="fecha_diagnostico" name="fecha_diagnostico" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Agregar Enfermedad</button>
+    </form>
+
+    <a href="{% url 'lista_ancianos' %}" class="btn btn-secondary mt-3">Volver a la lista de Ancianos</a>
+    <a href="{% url 'lista_enfermedades' anciano.id %}" class="btn btn-primary mt-3">Volver a la lista de Enfermedades</a>
+</body>
+</html>

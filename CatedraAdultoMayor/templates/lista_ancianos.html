@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Ancianos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Agregar Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="container">
+    <h1 class="my-4">Lista de Ancianos</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Edad</th>
+                <th>Dirección</th>
+                <th>Género</th>
+                <th>Enfermedades</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for anciano in ancianos %}
+            <tr>
+                <td>{{ anciano.nombre }}</td>
+                <td>{{ anciano.apellidos }}</td>
+                <td>{{ anciano.edad }}</td>
+                <td>{{ anciano.direccion }}</td>
+                <td>{{ anciano.genero }}</td>
+                <td>
+                    {% for enfermedad in anciano.enfermedades.all %}
+                        <p>- {{ enfermedad.nombre_enfermedad }}</p>
+                    {% endfor %}
+                    <!-- Botón para agregar una nueva enfermedad -->
+                    <a href="{% url 'crear_enfermedad' anciano.id %}" class="btn btn-sm btn-success mt-2">+</a>
+                </td>
+                <td>
+                    <a href="{% url 'editar_anciano' anciano.id %}" class="btn btn-sm btn-primary" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'eliminar_anciano' anciano.id %}" class="btn btn-sm btn-danger" title="Eliminar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                    <a href="{% url 'crear_contacto' anciano.id %}" class="btn btn-sm btn-info" title="Agregar Contacto">
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                    <a href="{% url 'lista_contactos' anciano.id %}" class="btn btn-sm btn-secondary" title="Ver Contactos">
+                        <i class="fas fa-address-book"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_anciano' %}" class="btn btn-success">Agregar Anciano</a>
+
+    <!-- Agregar enlaces a las dependencias de JavaScript de Bootstrap y Font Awesome -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
