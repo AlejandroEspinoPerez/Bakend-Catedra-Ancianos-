@@ -3,7 +3,20 @@
 from django.urls import path
 from . import views
 
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .api_views import AncianoViewSet, ContactoEmergenciaViewSet, EnfermedadViewSet
+
+router = DefaultRouter()
+router.register(r'ancianos', AncianoViewSet)
+router.register(r'contactos', ContactoEmergenciaViewSet)
+router.register(r'enfermedades', EnfermedadViewSet)
+
 urlpatterns = [
+
+    # Rutas de la API
+    path('api/', include(router.urls)),
+    
     path('', views.lista_ancianos, name='lista_ancianos'),
     path('crear/', views.crear_anciano, name='crear_anciano'),
     path('editar/<int:id>/', views.editar_anciano, name='editar_anciano'),
