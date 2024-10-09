@@ -31,3 +31,39 @@ class Enfermedad(models.Model):
 
     def __str__(self):
         return f'{self.nombre_enfermedad} ({self.fecha_diagnostico})'
+
+class User(models.Model):
+    id = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    email = models.EmailField()
+    gender = models.CharField(max_length=10)
+    role = models.CharField(max_length=100, blank=True, null=True)
+    isactive = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+class Role(models.Model):
+    code = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Menu(models.Model):
+    code = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class RoleAccess(models.Model):
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    haveedit = models.BooleanField(default=False)
+    haveadd = models.BooleanField(default=False)
+    havedelete = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.role} - {self.menu}"

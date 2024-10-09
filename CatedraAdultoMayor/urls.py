@@ -5,18 +5,25 @@ from . import views
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .api_views import AncianoViewSet, ContactoEmergenciaViewSet, EnfermedadViewSet
+from .api_views import AncianoViewSet, ContactoEmergenciaViewSet, EnfermedadViewSet,UserViewSet, RoleViewSet, MenuViewSet, RoleAccessViewSet
 
 router = DefaultRouter()
 router.register(r'ancianos', AncianoViewSet)
 router.register(r'contactos', ContactoEmergenciaViewSet)
 router.register(r'enfermedades', EnfermedadViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'roles', RoleViewSet)
+router.register(r'menus', MenuViewSet)
+router.register(r'roleaccess', RoleAccessViewSet)
 
 urlpatterns = [
 
     # Rutas de la API
     path('api/', include(router.urls)),
-    
+     # URL para agregar enfermedad a un anciano
+    path('api/ancianos/<int:pk>/agregar_enfermedad/', EnfermedadViewSet.as_view({'post': 'agregar_enfermedad'})),
+    path('api/ancianos/<int:pk>/agregar-contacto/', AncianoViewSet.as_view({'post': 'agregar_contacto'})),
+
     path('', views.lista_ancianos, name='lista_ancianos'),
     path('crear/', views.crear_anciano, name='crear_anciano'),
     path('editar/<int:id>/', views.editar_anciano, name='editar_anciano'),
