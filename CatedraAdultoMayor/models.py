@@ -8,16 +8,18 @@ class Anciano(models.Model):
     edad = models.IntegerField()
     direccion = models.CharField(max_length=255)
     genero = models.CharField(max_length=10)
+    numero_telefono = models.CharField(max_length=15)  # Nuevo campo
 
     def __str__(self):
         return f'{self.nombre} {self.apellidos}'
-
 
 class ContactoEmergencia(models.Model):
     anciano = models.ForeignKey(Anciano, on_delete=models.CASCADE, related_name='contactos')
     nombre_familiar = models.CharField(max_length=100)
     relacion = models.CharField(max_length=50)
     numero_telefono = models.CharField(max_length=15)
+    direccion = models.CharField(max_length=255)  # Nuevo campo
+    genero = models.CharField(max_length=10)  # Nuevo campo
 
     def __str__(self):
         return f'{self.nombre_familiar} ({self.relacion}) - {self.numero_telefono}'
@@ -28,6 +30,8 @@ class Enfermedad(models.Model):
     anciano = models.ForeignKey(Anciano, on_delete=models.CASCADE, related_name='enfermedades')
     nombre_enfermedad = models.CharField(max_length=255)
     fecha_diagnostico = models.DateField()
+    descripcion = models.TextField()  # Nuevo campo
+    medicamento = models.CharField(max_length=255)  # Nuevo campo
 
     def __str__(self):
         return f'{self.nombre_enfermedad} ({self.fecha_diagnostico})'

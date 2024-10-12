@@ -3,12 +3,11 @@ from .models import Anciano, ContactoEmergencia, Enfermedad ,User, Role, Menu, R
 
 # Definimos una clase llamada EnfermedadSerializer que hereda de serializers.ModelSerializer
 class EnfermedadSerializer(serializers.ModelSerializer):
-    
+    anciano = serializers.PrimaryKeyRelatedField(queryset=Anciano.objects.all())  # Permitir establecer el anciano
+
     class Meta:
-        # Especificamos que este serializer está asociado con el modelo Enfermedad
         model = Enfermedad
-        # Definimos los campos que queremos incluir en la representación del serializer
-        fields = ['id', 'nombre_enfermedad', 'fecha_diagnostico']
+        fields = ['id', 'nombre_enfermedad', 'fecha_diagnostico', 'descripcion', 'medicamento']  # Incluye los nuevos campos
 
 class AncianoSerializer(serializers.ModelSerializer):
     enfermedades = EnfermedadSerializer(many=True, read_only=True)  # Campo anidado para enfermedades
@@ -16,11 +15,12 @@ class AncianoSerializer(serializers.ModelSerializer):
     class Meta:  # Agrega la clase Meta aquí
         model = Anciano
         fields = '__all__'  # O define los campos que quieras exponer
-
 class ContactoEmergenciaSerializer(serializers.ModelSerializer):
+    anciano_nombre = serializers.CharField(source='anciano.nombre', read_only=True)  # Agrega el nombre del anciano
+
     class Meta:
         model = ContactoEmergencia
-        fields = ['id', 'nombre_familiar', 'numero_telefono', 'relacion']  # Incluye anciano
+        fields = ['id', 'nombre_familiar', 'numero_telefono', 'relacion', 'direccion', 'genero', 'anciano', 'anciano_nombre']  # Incluye el nuevo campo
 
 
 class UserSerializer(serializers.ModelSerializer):

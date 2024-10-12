@@ -34,6 +34,30 @@ class ContactoEmergenciaViewSet(viewsets.ModelViewSet):
     queryset = ContactoEmergencia.objects.all()
     serializer_class = ContactoEmergenciaSerializer
 
+    def perform_create(self, serializer):
+        anciano_id = self.request.data.get('anciano')
+        if not anciano_id:
+            return Response({'error': 'El ID del anciano es requerido.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            anciano = Anciano.objects.get(id=anciano_id)
+            serializer.save(anciano=anciano)
+        except Anciano.DoesNotExist:
+            return Response({'error': 'Anciano no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+    def perform_update(self, serializer):
+        # Obtener el ID del anciano desde la solicitud
+        anciano_id = self.request.data.get('anciano')
+        if anciano_id:
+            try:
+                anciano = Anciano.objects.get(id=anciano_id)
+                serializer.save(anciano=anciano)
+            except Anciano.DoesNotExist:
+                return Response({'error': 'Anciano no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            # Si no se proporciona un anciano, simplemente guarda el objeto
+            serializer.save()
+
+
 class EnfermedadViewSet(viewsets.ModelViewSet):
     queryset = Enfermedad.objects.all()
     serializer_class = EnfermedadSerializer

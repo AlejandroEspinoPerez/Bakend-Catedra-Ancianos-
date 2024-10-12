@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'mi_proyecto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'CatedraDB',  # El nombre de tu base de datos
+        'NAME': 'CatedraAdultoDB',  # El nombre de tu base de datos
         'USER': 'postgres',     # Tu usuario de PostgreSQL
         'PASSWORD': 'password',  # La contraseña de tu usuario
         'HOST': 'localhost',      # El host del servidor (localhost si es local)
