@@ -20,6 +20,7 @@ class AncianoViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
     @action(detail=True, methods=['post'], url_path='agregar-contacto')
     def agregar_contacto(self, request, pk=None):
         anciano = self.get_object()  # Obtiene el anciano desde la URL
