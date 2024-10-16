@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mi_aplicacion',
     'CatedraAdultoMayor',  # Agrega tu aplicación aquí
     'rest_framework',
     'corsheaders',
