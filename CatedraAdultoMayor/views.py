@@ -26,7 +26,7 @@ def lista_contactos_todos(request):
     return render(request, 'lista_contactos_todos.html', {'contactos': contactos})
 
 def lista_ancianos(request):
-    ancianos = Anciano.objects.all().prefetch_related('enfermedades')  # Incluye las enfermedades
+    ancianos = Anciano.objects.all().prefetch_related('enfermedades')
     return render(request, 'lista_ancianos.html', {'ancianos': ancianos})
 
 # Crear anciano
